@@ -1,0 +1,10 @@
+<div class="row justify-content-center">
+    <table class="table table-bordered h-table">
+        <tbody>
+            <tr *ngFor="let num of numbers">
+                <td [ngClass]="{'h-col': n.number!=0 && n.status=='Pending','h-col-selected': n.status=='Selected','h-col-empty':n.number==0}"
+                    *ngFor="let n of num">{{n.number==0?"":n.number}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
