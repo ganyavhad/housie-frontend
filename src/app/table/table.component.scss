@@ -4,6 +4,12 @@
   text-align: center;
   align-self: center;
 }
+.draw-table {
+  background: yellow;
+  width: 80%;
+  text-align: center;
+  align-self: center;
+}
 .table-bordered td,
 .table-bordered th {
   border: 2px solid black;
@@ -16,4 +22,7 @@
 }
 .h-col-selected {
   background-color: green;
+}
+.draw-num {
+  font-size: xx-large;
 }

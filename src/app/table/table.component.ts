@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { SocketioService } from '../socketio.service';
 
 @Component({
   selector: 'app-table',
@@ -8,6 +9,8 @@ import { ApiService } from '../api.service';
 })
 export class TableComponent implements OnInit {
   numbers = [];
+  draw = [];
+  drawNum = Number;
   getTicket() {
     this.apiService.getTicket().subscribe(
       (res: any) => {
@@ -19,44 +22,36 @@ export class TableComponent implements OnInit {
       }
     );
   }
-  constructor(public apiService: ApiService) {}
+  generateNumArr = function () {
+    let counter = 1;
+    for (let i = 0; i < 9; i++) {
+      this.draw.push([]);
+      for (let j = 0; j < 10; j++) {
+        this.draw[i].push({ number: counter, status: 'Open' });
+        counter++;
+      }
+    }
+  };
+  constructor(
+    public apiService: ApiService,
+    private socketService: SocketioService
+  ) {}
 
   ngOnInit() {
     this.getTicket();
-    // this.numbers = [
-    //   [
-    //     { number: 0, status: 'None' },
-    //     { number: 15, status: 'Pending' },
-    //     { number: 24, status: 'Pending' },
-    //     { number: 35, status: 'Pending' },
-    //     { number: 0, status: 'None' },
-    //     { number: 0, status: 'None' },
-    //     { number: 65, status: 'Pending' },
-    //     { number: 76, status: 'Pending' },
-    //     { number: 0, status: 'None' },
-    //   ],
-    //   [
-    //     { number: 7, status: 'Pending' },
-    //     { number: 0, status: 'None' },
-    //     { number: 27, status: 'Pending' },
-    //     { number: 0, status: 'None' },
-    //     { number: 42, status: 'Pending' },
-    //     { number: 55, status: 'Pending' },
-    //     { number: 0, status: 'None' },
-    //     { number: 0, status: 'None' },
-    //     { number: 88, status: 'Pending' },
-    //   ],
-    //   [
-    //     { number: 0, status: 'None' },
-    //     { number: 18, status: 'Pending' },
-    //     { number: 28, status: 'Pending' },
-    //     { number: 0, status: 'None' },
-    //     { number: 45, status: 'Pending' },
-    //     { number: 0, status: 'None' },
-    //     { number: 70, status: 'Pending' },
-    //     { number: 78, status: 'Pending' },
-    //     { number: 0, status: 'None' },
-    //   ],
-    // ];
+    this.generateNumArr();
+    this.socketService.setupSocketConnection();
+    this.socketService.socket.on('draw', (num) => {
+      this.drawNum = num;
+      for (let i = 0; i < 9; i++) {
+        let index = this.draw[i].findIndex((n) => {
+          return num == n.number;
+        });
+        if (index !== -1) {
+          this.draw[i][index].status = 'Closed';
+          return;
+        }
+      }
+    });
   }
 }
