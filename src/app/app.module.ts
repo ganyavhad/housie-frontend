@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { TableComponent } from './table/table.component';
 import { SocketioService } from './socketio.service';
 import { LoginComponent } from './login/login.component';
+import { InsideTableComponent } from './inside-table/inside-table.component';
 
 @NgModule({
-  declarations: [AppComponent, TableComponent, LoginComponent],
+  declarations: [AppComponent, TableComponent, LoginComponent, InsideTableComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [SocketioService],
   bootstrap: [AppComponent],

@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '../app/login/login.component'
 import { TableComponent } from './table/table.component';
+import { InsideTableComponent } from './inside-table/inside-table.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,13 @@ const routes: Routes = [
     path: 'table',
     component: TableComponent,
     pathMatch: 'full'
-  }
+  },
+  {
+    path: 'inside-table',
+    component: InsideTableComponent,
+    pathMatch: 'full'
+  },
+  { path: '', redirectTo: '/table', pathMatch: 'full' }
 ];
 
 @NgModule({

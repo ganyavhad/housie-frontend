@@ -1,34 +1,18 @@
 <div>
-    <div class="row justify-content-center">
-        <table class="table table-bordered draw-table">
-            <tbody>
-                <tr *ngFor="let num of draw">
-                    <td [ngClass]="{'h-col-selected': n.status=='Closed','h-col-empty':n.status == 'Open'}"
-                        *ngFor="let n of num">{{n.number==0?"":n.number}}</td>
-                </tr>
-            </tbody>
-        </table>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link Active" (click)="select('Create')">Create Room</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" (click)="select('Join')">Join Room</a>
+        </li>
+    </ul>
+</div>
+<div>
+    <div *ngIf="type == 'Create'">
+        <button class="btn btn-primary" (click)="createRoom()">Create Room</button>
     </div>
-    <div class="row">
-        <!-- <div class="col-sm-3">
-
-        </div> -->
-        <div class="justify-content-center col-sm-8">
-            <table class="table table-bordered h-table">
-                <tbody>
-                    <tr *ngFor="let num of numbers">
-                        <td [ngClass]="{'h-col': n.number!=0 && n.status=='Pending','h-col-selected': n.status=='Selected','h-col-empty':n.number==0}"
-                            *ngFor="let n of num">{{n.number==0?"":n.number}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm-4 justify-content-right">
-            <span>Last Number</span>
-            <strong class="draw-num ">
-                {{drawNum}}
-            </strong>
-        </div>
+    <div *ngIf="type == 'Join'">
+        Join
     </div>
-
 </div>
