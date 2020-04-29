@@ -5,6 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '../app/login/login.component'
 import { TableComponent } from './table/table.component';
 import { InsideTableComponent } from './inside-table/inside-table.component';
+import {
+  AuthGuardService as AuthGuard
+} from "./auth-gaurd.service"
+import { from } from 'rxjs';
+
 
 const routes: Routes = [
   {
@@ -15,12 +20,14 @@ const routes: Routes = [
   {
     path: 'table',
     component: TableComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   {
     path: 'inside-table',
     component: InsideTableComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [AuthGuard]
   },
   { path: '', redirectTo: '/table', pathMatch: 'full' }
 ];
