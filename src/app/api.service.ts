@@ -14,7 +14,18 @@ export class ApiService {
   }
   createRoom() {
     let user = localStorage.getItem('user');
-    let userId = JSON.parse(user)
+    let userId = JSON.parse(user)._id
     return this.httpClient.post(environment.serverUrl + '/room/createRoom', { _id: userId, maxPlayer: 2 });
+  }
+  startGame(data) {
+    let user = localStorage.getItem('user');
+    let userId = JSON.parse(user)._id
+    return this.httpClient.post(environment.serverUrl + '/room/startGame', { _id: userId, roomId: data.roomId });
+  }
+  joinRoom(data) {
+    let user = localStorage.getItem('user');
+    let userId = JSON.parse(user)._id
+    console.log("aaaaaaa", { _id: userId, roomId: data.roomId })
+    return this.httpClient.post(environment.serverUrl + '/room/joinRoom', { _id: userId, roomId: data.roomId });
   }
 }

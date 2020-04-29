@@ -8,11 +8,12 @@ import { TableComponent } from './table/table.component';
 import { SocketioService } from './socketio.service';
 import { LoginComponent } from './login/login.component';
 import { InsideTableComponent } from './inside-table/inside-table.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, TableComponent, LoginComponent, InsideTableComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [SocketioService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

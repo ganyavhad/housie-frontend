@@ -10,9 +10,14 @@
 </div>
 <div>
     <div *ngIf="type == 'Create'">
-        <button class="btn btn-primary" (click)="createRoom()">Create Room</button>
+        <button class="btn btn-primary" *ngIf="!roomCreated" (click)="createRoom()">Create Room</button>
+        <button class="btn btn-primary" *ngIf="roomCreated" (click)="createRoom()">Start Game</button>
     </div>
     <div *ngIf="type == 'Join'">
-        Join
+        <div *ngIf="!roomJoined">
+            <input [(ngModel)]="roomId" type="text">
+            <button class="btn btn-primary" (click)="joinRoom(roomId)">Join Room</button>
+        </div>
+        <label for="" *ngIf="roomJoined">Game will be start soon</label>
     </div>
 </div>

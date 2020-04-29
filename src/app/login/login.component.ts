@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
       (res: any) => {
         console.log(res);
         localStorage.setItem('user', JSON.stringify(res));
-        this.router.navigate(['/inside-table']);
+        this.router.navigate(['/table']);
       },
       (err) => {
         console.log(err);
