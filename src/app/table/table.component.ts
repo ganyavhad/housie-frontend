@@ -46,11 +46,12 @@ export class TableComponent implements OnInit {
   }
   startGame(roomData) {
     this.apiService.startGame(roomData).subscribe(
-      (res: String) => {
-        this.router.navigate(['/inside-table', { id: roomData.roomId }]);
+      (res) => {
+        console.log("start", res)
+        this.router.navigate(['/inside-table', roomData.roomId])
       },
       (err) => {
-        console.log(err);
+        console.log("error", err);
       }
     );
   }
@@ -59,7 +60,8 @@ export class TableComponent implements OnInit {
       (res: any) => {
         this.roomJoined = true
         this.socketService.socket.on('game_start_' + roomId, (data) => {
-          this.router.navigate(['/inside-table', { id: roomId }]);
+          let id = roomId;
+          this.router.navigate(['/inside-table', roomId])
         })
       },
       (err) => {

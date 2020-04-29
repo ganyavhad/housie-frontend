@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { SocketioService } from '../socketio.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-inside-table',
@@ -35,14 +36,18 @@ export class InsideTableComponent implements OnInit {
   };
   constructor(
     public apiService: ApiService,
-    private socketService: SocketioService
+    private socketService: SocketioService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.getTicket();
+    let id = this.route.snapshot.paramMap.get('id');
+    console.log(id)
+    // this.getTicket();
     this.generateNumArr();
     this.socketService.setupSocketConnection();
-    this.socketService.socket.on('draw', (num) => {
+    this.socketService.socket.on('draw_' + id, (num) => {
       this.drawNum = num;
       for (let i = 0; i < 9; i++) {
         let index = this.draw[i].findIndex((n) => {

@@ -26,7 +26,6 @@ const routes: Routes = [
   {
     path: 'inside-table/:id',
     component: InsideTableComponent,
-    pathMatch: 'full',
     canActivate: [AuthGuard]
   },
   { path: '', redirectTo: '/table', pathMatch: 'full' }
