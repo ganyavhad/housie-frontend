@@ -12,12 +12,14 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class InsideTableComponent implements OnInit {
   numbers = [];
   draw = [];
+  ticketData = {}
   drawNum = Number;
-  getTicket() {
-    this.apiService.getTicket().subscribe(
+  roomData = {}
+  getTicket(id) {
+    this.apiService.getTicket(id).subscribe(
       (res: any) => {
         console.log(res);
-        this.numbers = res;
+        this.ticketData = res;
       },
       (err) => {
         console.log(err);
@@ -44,7 +46,8 @@ export class InsideTableComponent implements OnInit {
   ngOnInit() {
     let id = this.route.snapshot.paramMap.get('id');
     console.log(id)
-    // this.getTicket();
+    this.getTicket(id);
+    this.getRoom(id)
     this.generateNumArr();
     this.socketService.setupSocketConnection();
     this.socketService.socket.on('draw_' + id, (num) => {
@@ -59,6 +62,27 @@ export class InsideTableComponent implements OnInit {
         }
       }
     });
+  }
+  getRoom(roomId) {
+    this.apiService.getRoom(roomId).subscribe(
+      (res: any) => {
+        this.roomData = res
+        this.drawNum = res.draw[res.draw.length - 1]
+        for (let i = 0; i < 9; i++) {
+          for (let j = 0; j < 10; j++) {
+            let index = res.draw.findIndex((n) => {
+              return this.draw[i][j].number == n;
+            });
+            if (index !== -1) {
+              this.draw[i][j].status = 'Closed';
+            }
+          }
+        }
+      },
+      (err) => {
+        console.log("error", err);
+      }
+    );
   }
 }
 

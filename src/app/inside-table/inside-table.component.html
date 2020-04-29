@@ -16,9 +16,17 @@
         <div class="justify-content-center col-sm-8">
             <table class="table table-bordered h-table">
                 <tbody>
-                    <tr *ngFor="let num of numbers">
+                    <tr>
                         <td [ngClass]="{'h-col': n.number!=0 && n.status=='Pending','h-col-selected': n.status=='Selected','h-col-empty':n.number==0}"
-                            *ngFor="let n of num">{{n.number==0?"":n.number}}</td>
+                            *ngFor="let n of ticketData.ticket.firstLine">{{n.number==0?"":n.number}}</td>
+                    </tr>
+                    <tr>
+                        <td [ngClass]="{'h-col': n.number!=0 && n.status=='Pending','h-col-selected': n.status=='Selected','h-col-empty':n.number==0}"
+                            *ngFor="let n of ticketData.ticket.secondLine">{{n.number==0?"":n.number}}</td>
+                    </tr>
+                    <tr>
+                        <td [ngClass]="{'h-col': n.number!=0 && n.status=='Pending','h-col-selected': n.status=='Selected','h-col-empty':n.number==0}"
+                            *ngFor="let n of ticketData.ticket.thirdLine">{{n.number==0?"":n.number}}</td>
                     </tr>
                 </tbody>
             </table>

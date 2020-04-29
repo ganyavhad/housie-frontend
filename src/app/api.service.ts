@@ -6,8 +6,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiService {
   constructor(private httpClient: HttpClient) { }
-  getTicket() {
-    return this.httpClient.get(environment.serverUrl + '/getTicket');
+  getTicket(id) {
+    let user = localStorage.getItem('user');
+    let data = {
+      roomId: id,
+      userId: JSON.parse(user)._id
+    }
+    return this.httpClient.post(environment.serverUrl + '/ticket/getTicket', data);
   }
   guestLogin() {
     return this.httpClient.post(environment.serverUrl + '/player/guestLogin', {});
@@ -26,5 +31,8 @@ export class ApiService {
     let user = localStorage.getItem('user');
     let userId = JSON.parse(user)._id
     return this.httpClient.post(environment.serverUrl + '/room/joinRoom', { _id: userId, roomId: data.roomId });
+  }
+  getRoom(roomId) {
+    return this.httpClient.get(environment.serverUrl + '/room/getRoom/' + roomId);
   }
 }
