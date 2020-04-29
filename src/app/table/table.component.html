@@ -11,7 +11,7 @@
 <div>
     <div *ngIf="type == 'Create'">
         <button class="btn btn-primary" *ngIf="!roomCreated" (click)="createRoom()">Create Room</button>
-        <button class="btn btn-primary" *ngIf="roomCreated" (click)="createRoom()">Start Game</button>
+        <button class="btn btn-primary" *ngIf="roomCreated" (click)="startGame(roomData)">Start Game</button>
     </div>
     <div *ngIf="type == 'Join'">
         <div *ngIf="!roomJoined">

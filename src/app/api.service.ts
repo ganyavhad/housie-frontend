@@ -25,7 +25,6 @@ export class ApiService {
   joinRoom(data) {
     let user = localStorage.getItem('user');
     let userId = JSON.parse(user)._id
-    console.log("aaaaaaa", { _id: userId, roomId: data.roomId })
     return this.httpClient.post(environment.serverUrl + '/room/joinRoom', { _id: userId, roomId: data.roomId });
   }
 }

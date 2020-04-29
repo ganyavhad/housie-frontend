@@ -7,11 +7,8 @@ import { environment } from 'src/environments/environment';
 })
 export class SocketioService {
   socket;
-  constructor() {}
+  constructor() { }
   setupSocketConnection() {
     this.socket = io(environment.serverUrl);
-    // this.socket.on('draw', (num) => {
-    //   console.log(num);
-    // });
   }
 }

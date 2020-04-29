@@ -24,7 +24,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'inside-table',
+    path: 'inside-table/:id',
     component: InsideTableComponent,
     pathMatch: 'full',
     canActivate: [AuthGuard]
