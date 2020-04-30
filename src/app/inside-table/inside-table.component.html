@@ -18,15 +18,20 @@
                 <tbody>
                     <tr>
                         <td [ngClass]="{'h-col': n.number!=0 && n.status=='Pending','h-col-selected': n.status=='Selected','h-col-empty':n.number==0}"
-                            *ngFor="let n of ticketData.ticket.firstLine">{{n.number==0?"":n.number}}</td>
+                            *ngFor="let n of ticket.firstLine">
+                            <label (click)="selectNumber('firstLine',n.number)">{{n.number==0?"":n.number}}</label>
+                        </td>
                     </tr>
                     <tr>
                         <td [ngClass]="{'h-col': n.number!=0 && n.status=='Pending','h-col-selected': n.status=='Selected','h-col-empty':n.number==0}"
-                            *ngFor="let n of ticketData.ticket.secondLine">{{n.number==0?"":n.number}}</td>
+                            *ngFor="let n of ticket.secondLine">
+                            <label (click)="selectNumber('secondLine',n.number)">{{n.number==0?"":n.number}}</label>
+                        </td>
                     </tr>
                     <tr>
                         <td [ngClass]="{'h-col': n.number!=0 && n.status=='Pending','h-col-selected': n.status=='Selected','h-col-empty':n.number==0}"
-                            *ngFor="let n of ticketData.ticket.thirdLine">{{n.number==0?"":n.number}}</td>
+                            *ngFor="let n of ticket.thirdLine">
+                            <label (click)="selectNumber('thirdLine',n.number)">{{n.number==0?"":n.number}}</label></td>
                     </tr>
                 </tbody>
             </table>

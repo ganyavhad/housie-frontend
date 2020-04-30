@@ -12,14 +12,16 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class InsideTableComponent implements OnInit {
   numbers = [];
   draw = [];
-  ticketData = {}
+  ticket = <any>{};
   drawNum = Number;
+  tiketId: Number
   roomData = {}
   getTicket(id) {
     this.apiService.getTicket(id).subscribe(
       (res: any) => {
         console.log(res);
-        this.ticketData = res;
+        this.tiketId = res._id
+        this.ticket = res.ticket;
       },
       (err) => {
         console.log(err);
@@ -78,6 +80,24 @@ export class InsideTableComponent implements OnInit {
             }
           }
         }
+      },
+      (err) => {
+        console.log("error", err);
+      }
+    );
+  }
+  selectNumber(line, number) {
+    console.log(line, number)
+    this.apiService.selectNumber({ _id: this.tiketId, line: line, number: number }).subscribe(
+      (res: any) => {
+        let index = this.ticket[line].findIndex((n) => {
+          return number == n.number;
+        });
+        if (index !== -1) {
+          this.ticket[line][index].status = 'Selected';
+          return;
+        }
+        this.ticket[line]
       },
       (err) => {
         console.log("error", err);

@@ -35,4 +35,7 @@ export class ApiService {
   getRoom(roomId) {
     return this.httpClient.get(environment.serverUrl + '/room/getRoom/' + roomId);
   }
+  selectNumber(data) {
+    return this.httpClient.post(environment.serverUrl + '/ticket/selectNumber', data);
+  }
 }
