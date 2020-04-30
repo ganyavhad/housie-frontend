@@ -15,7 +15,7 @@ export class InsideTableComponent implements OnInit {
   ticket = <any>{};
   drawNum = Number;
   tiketId: Number
-  roomData = {}
+  roomData = <any>{}
   getTicket(id) {
     this.apiService.getTicket(id).subscribe(
       (res: any) => {
@@ -98,6 +98,16 @@ export class InsideTableComponent implements OnInit {
           return;
         }
         this.ticket[line]
+      },
+      (err) => {
+        console.log("error", err);
+      }
+    );
+  }
+  fullHousie() {
+    this.apiService.fullHousie({ _id: this.tiketId, roomId: this.roomData._id }).subscribe(
+      (res: any) => {
+        console.log("Result claim")
       },
       (err) => {
         console.log("error", err);

@@ -38,4 +38,7 @@ export class ApiService {
   selectNumber(data) {
     return this.httpClient.post(environment.serverUrl + '/ticket/selectNumber', data);
   }
+  fullHousie(data) {
+    return this.httpClient.post(environment.serverUrl + '/ticket/fullHousie', data);
+  }
 }
